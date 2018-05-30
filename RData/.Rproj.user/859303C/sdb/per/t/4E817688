@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "install.packages(\"rjson\")\ninstall.packages(\"igraph\")\nrequire(rjson)\nrequire(tidyverse)\nrequire(stringr)\nrequire(dplyr)\nrequire(igraph)\n\n\ntwitter_rtdata<-read.csv(\"rt_data.csv\")\ntwitter_data<-read.csv(\"twitter_data.csv\")\n\nhashtag_pattern <- \"#([[:alnum:]]|[_])+\"\n\nmaindf<-twitter_data%>%group_by(twitter.handle,party)%>%summarise(freq = n()) #\ncolnames(maindf) <- c(\"name\", \"party\",\"freq\")\n\nrtdf<-twitter_rtdata%>%group_by(twitter.handle.x, twitter.handle.y)%>%summarise(freq = n())\n\nGraphx<-graph_from_data_frame(rtdf,directed = TRUE,vertices = NULL)\npagerank<-page.rank(Graphx, vids = V(Graphx), directed = TRUE,damping = 0.85, weights = NULL, options = igraph.arpack.default)\n#getting pagerank using igraph\n\nprdf<-as.data.frame(pagerank) #make df\nprdf<-prdf%>%select(vector) #get pagerank\nprdf<-prdf%>%mutate(twitter.handle=rownames(prdf)) #mutate the rownames\n\nmaindfpr<-left_join(maindf,prdf) #join and rename\ncolnames(maindfpr)<-c(\"name\",\"party\",\"freq\",\"pagerank\")\ncolnames(rtdf)<-c(\"source\",\"target\",\"count\")\n\nnodes<-toJSON(unname(split(maindfpr, 1:nrow(maindfpr)))) #make JSON\nlinks<-toJSON(unname(split(rtdf,1:nrow(rtdf))))\nwrite(nodes, \"nwnodes.json\")\nwrite(links, \"nwlinks.json\")\n\nrm(twitter_rtdata)\n",
+    "created" : 1512122130249.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "973895847",
+    "id" : "4E817688",
+    "lastKnownWriteTime" : 1514583875,
+    "last_content_update" : 1514583875867,
+    "path" : "C:/Users/simon/Desktop/css/AbgabeCSSWS17DobioszWolff/RData/Main.R",
+    "project_path" : "Main.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "install.packages(\"rjson\")\ninstall.packages(\"igraph\")\ninstall.packages(\"ggplot\")\nrequire(rjson)\nrequire(tidyverse)\nrequire(stringr)\nrequire(dplyr)\nrequire(igraph)\nrequire(ggplot)\nrequire(stringi)\n\ntwitter_rtdata<-read.csv(\"rt_data.csv\")\ntwitter_data<-read.csv(\"twitter_data.csv\")\n\nhashtag_pattern <- \"#([[:alnum:]]|[_])+\"\n\n#create df and select\nhashtag22<-twitter_data%>%select(ID,text,party,weeksTillElection)%>%\n  mutate(hashtags=str_extract_all(text,hashtag_pattern))\nhashtag22<-hashtag22%>%unnest()\n\n#clean hashtags\nsource(\"cleanHashtags.R\")\nhashtag22<-hashtag22%>%\n  mutate(hashtags=cleanHashtags(hashtags))\n\ntopHashtags<-hashtag22%>%\n  group_by(party,hashtags,weeksTillElection)%>%\n  summarise(freq=n())\ntopHashtags<-topHashtags%>%filter(weeksTillElection<7)%>%filter(hashtags!=\"a\") #filter\ntopHashtags<-topHashtags%>%ungroup()%>%group_by(party,weeksTillElection)%>%top_n(5) #top5\n\ntopHashtagsJson<-toJSON(unname(split(topHashtags, 1:nrow(topHashtags))))\nwrite(topHashtagsJson, \"topHashtags5.json\")\n\n\n\n",
+    "created" : 1513687705198.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1284962768",
+    "id" : "90EADDAB",
+    "lastKnownWriteTime" : 1514558562,
+    "last_content_update" : 1514558562630,
+    "path" : "C:/Users/simon/Desktop/css/AbgabeCSSWS17DobioszWolff/RData/topHash.R",
+    "project_path" : "topHash.R",
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

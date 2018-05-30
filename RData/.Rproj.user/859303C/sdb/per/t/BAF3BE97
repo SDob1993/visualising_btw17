@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "require(tidyverse)\nrequire(stringr)\nrequire(lsa)\nrequire(rjson)\n\nsource(\"cleanHashtags.R\")\n\nhashtag_pattern <- \"#([[:alnum:]]|[_])+\"\n\n\n#select, filter,mutate, rename\n\nhashtagSearch<-twitter_data%>%select(ID,text,twitter.handle,hashtagCount,party)%>%filter(hashtagCount>1)%>%\n  mutate(hashtags=str_extract_all(text,hashtag_pattern))%>%mutate(hashtags=cleanHashtags(hashtags))%>%\n  select(party,hashtags,hashtagCount)%>%separate(hashtags,into=c(\"Hashtag1\",\"Hashtag2\",\"Hashtag3\",\"Hashtag4\",\"Hashtag5\",\"Hashtag6\",\"Hashtag7\",\"Hashtag8\",\"Hashtag9\",\"Hashtag10\",\"Hashtag11\",\"Hashtag12\",\"Hashtag13\",\"Hashtag14\"),sep=\"\\\\,\")\n\n#cleaning\nhashtagSearchCleaned<-hashtagSearch%>%mutate(Hashtag1=str_replace(Hashtag1,\"c+[^\\\\w\\\\s]+\",\"\"))\nhashtagSearchCleaned<-hashtagSearchCleaned%>%mutate(Hashtag1=str_replace(Hashtag1,\"[^\\\\w\\\\s]+\",\"\"))\nhashtagSearchCleaned<-hashtagSearchCleaned%>%mutate(Hashtag3=str_replace(Hashtag3,\"[^\\\\w\\\\s]+\",\"\"))\nhashtagSearchCleaned<-hashtagSearchCleaned%>%mutate(Hashtag4=str_replace(Hashtag4,\"[^\\\\w\\\\s]+\",\"\"))\nhashtagSearchCleaned<-hashtagSearchCleaned%>%mutate(Hashtag5=str_replace(Hashtag5,\"[^\\\\w\\\\s]+\",\"\"))\nhashtagSearchCleaned<-hashtagSearchCleaned%>%mutate(Hashtag6=str_replace(Hashtag6,\"[^\\\\w\\\\s]+\",\"\"))\nhashtagSearchCleaned<-hashtagSearchCleaned%>%mutate(Hashtag7=str_replace(Hashtag7,\"[^\\\\w\\\\s]+\",\"\"))\nhashtagSearchCleaned<-hashtagSearchCleaned%>%mutate(Hashtag8=str_replace(Hashtag8,\"[^\\\\w\\\\s]+\",\"\"))\nhashtagSearchCleaned<-hashtagSearchCleaned%>%mutate(Hashtag9=str_replace(Hashtag9,\"[^\\\\w\\\\s]+\",\"\"))\nhashtagSearchCleaned<-hashtagSearchCleaned%>%mutate(Hashtag10=str_replace(Hashtag10,\"[^\\\\w\\\\s]+\",\"\"))\nhashtagSearchCleaned<-hashtagSearchCleaned%>%mutate(Hashtag11=str_replace(Hashtag11,\"[^\\\\w\\\\s]+\",\"\"))\nhashtagSearchCleaned<-hashtagSearchCleaned%>%mutate(Hashtag12=str_replace(Hashtag12,\"[^\\\\w\\\\s]+\",\"\"))\nhashtagSearchCleaned<-hashtagSearchCleaned%>%mutate(Hashtag13=str_replace(Hashtag13,\"[^\\\\w\\\\s]+\",\"\"))\nhashtagSearchCleaned<-hashtagSearchCleaned%>%mutate(Hashtag14=str_replace(Hashtag14,\"[^\\\\w\\\\s]+\",\"\"))\n\n#full matrix\nhspre<-hashtagSearchCleaned\n#gather\nhsmain<-gather(hspre,Hashtag1,Hashtag2,2:(ncol(hspre)))\n\n#rename\ncolnames(hsmain)<-c(\"Hashtag1\",\"aaa\",\"Hashtag2\")\nhsmain<-hsmain%>%select(-aaa)\n#filter\nhsmain<-hsmain%>%filter(!is.na(Hashtag2))\n#wir erstellen einen zweiten dataframe mit umgekehrter Zuordnung, so ist es egal ob der hashtag davor \n#oder danach im Tweet vorgekommen iust. Es zählt nur, dass sie überhaupt zusaamen in einem stehen\nhsmain2<-hsmain\ncolnames(hsmain2)<-c(\"Hashtag2\",\"Hashtag1\")\n#bind\nhsmain3<-rbind(hsmain,hsmain2)\n\n\n#re summarise\nhsmainfinal<-hsmain3%>%group_by(Hashtag1,Hashtag2)%>%summarise(freq=n())\nhsmainfinaltest<-hsmainfinal%>%filter(freq>1)\n  \n#createJSON\nhsmainJson<-toJSON(unname(split(hsmainfinal, 1:nrow(hsmainfinal))))\nwrite(hsmainJson, \"hssearch.json\")\n\n\n\n\n\n\n\n",
+    "created" : 1513689658839.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "959243588",
+    "id" : "BAF3BE97",
+    "lastKnownWriteTime" : 1514558559,
+    "last_content_update" : 1514558559799,
+    "path" : "C:/Users/simon/Desktop/css/AbgabeCSSWS17DobioszWolff/RData/hashtagCO.R",
+    "project_path" : "hashtagCO.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

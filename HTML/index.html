@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Explore the Twitter-Use of Politicians</title>
+    <link rel="stylesheet" href="css/stylesheet.css"/>
+</head>
+<body background="src/img/background.jpg" onload="bcweek();bcall()">
+
+<h1 id="heading">Explore the Twitter-Use of Politicians</h1>
+
+<p class="ntext">Der Datensatz besteht aus den Twitter-Accounts und den zugehörigen Tweets aus dem Wahljahr 2017.
+    Er beinhaltet alle Tweets von Beginn des Jahres bis 3 Wochen nach der Bundestagswahl 2017.<br>
+    Im Folgenden sind alle Parteien zu sehen in denen die entsprechenden Politiker Mitglied sind und die entsprechende Farbkodierung für die folgenden Visualisierungen:<br></p>
+
+<img src="src/img/cdu.png" width="200" height="100"><svg height="100" width="100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="black" /></svg>
+<img src="src/img/csu.png" width="275" height="100"><svg height="100" width="100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="#4169e1" /></svg>
+<img src="src/img/spd.jpg" width="200" height="100"><svg height="100" width="100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="#e2001a" /></svg><br>
+<img src="src/img/afd.png" width="200" height="100"><svg height="100" width="100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="#009ee0" /></svg>
+<img src="src/img/fdp.png" width="200" height="100"><svg height="100" width="100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="#ffed00" /></svg>
+<img src="src/img/dielinke.png" width="200" height="90"><svg height="100" width="100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="#9932CD" /></svg>
+<img src="src/img/gruene.png" width="200" height="100"><svg height="100" width="100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="#1fa12d" /></svg><br><br><br>
+
+<p class="nheadings"><b>Das Retweet-Netzwerk</b></p>
+<div id="containernw">
+    <canvas id="network" width="1500" height="800"></canvas><br>
+</div>
+<p class="nheadings"><b>Die Tweets in Zahlen</b></p>
+<p class="ntext">Für folgende Visualisierungen wurden die Tweets 6 Wochen vor bis 3 Wochen nach der Wahl ausgewertet:</p>
+<p class="ntext">Tweetanteil pro Woche</p>
+<div id ="containersvgweekly"></div>
+<div class="slidecontainer">
+    <input type="range" min="1" max="10" value="10" class="slider" id="sliderweekly" oninput="bcweek()">
+    <span id="valueweek" class="ntext" ></span>
+</div>
+<p class="ntext">Tweetanteil Gesamt</p>
+<div id ="containersvgall"></div>
+<div class="slidecontainer">
+    <input type="range" min="1" max="10" value="10" class="slider" id="sliderall" oninput="bcall()">
+</div>
+<span id="valueall" class="ntext" ></span>
+<p class="nheadings"><b>Hashtags</b></p>
+<p class="ntext">Die Top 5 Hashtags nach Parteien und Wochen: </p>
+<div class="containerhashpre">
+    <input type="range" min="1" max="10" value="10" class="slider" id="sliderhash">
+    <span id="valuehash" class="ntext"></span><br>
+    <select name="party" size="1" class="select" id="selectparty">
+        <option>AfD</option>
+        <option>CDU</option>
+        <option>CSU</option>
+        <option>DIE LINKE</option>
+        <option>FDP</option>
+        <option>GRUENE</option>
+        <option>SPD</option>
+    </select>
+    <button type="submit" class="btn" id="gohash" onclick="gettophash()">Anzeigen</button>
+</div>
+<span id="containertophashtags" class="ntext">Partei und Woche auswählen und auf Anzeigen klicken!</span><br>
+<p class="ntext">Welche Hashtags wurden zusammen und wie oft verwendet? </p>
+<input type="text" id="hssearch"  placeholder="Suche #.."/>
+<button type="submit" class="btn" id="gosearch" onclick="searchgo()">Anzeigen</button><span id="suggs" class="ntext"></span><br>
+<span id="containerhssearch" class="ntext">Hashtag eingeben und auf Anzeigen klicken!</span><br>
+
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="js/network.js"></script>
+<script src="js/barcharts1.js"></script>
+<script src="js/tophash.js"></script>
+<script src="js/hssearch.js"></script>
+<noscript>
+    JavaScript ist deaktiviert: Bitte JavaScript aktivieren um weitere Features nutzen zu können!
+</noscript>
+</body>
+<footer> &copy; <address style="display: inline;">Simon Dobiosz u. Marian Wolff</address> Erstellt im Rahmen des Kurses "Computational Social Science"</footer>
+</html>

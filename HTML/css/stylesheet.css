@@ -1,0 +1,189 @@
+@font-face { font-family: 'schrift';
+    src: url('Champagne & Limousines.ttf') format('truetype'); }
+
+body{
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#heading
+{
+    width: auto;
+    font-size: 100px;
+    color: #000;
+    margin: auto;
+    text-align: center;
+    font-family: schrift, arial, sans-serif;
+}
+
+.ntext{
+    font-size: 40px;
+    color: #000;
+    text-align: left;
+    font-family: schrift, arial, sans-serif;
+    font-style: italic;
+    width: 75%;
+    padding-left: 10px;
+    height: 100%;
+    }
+
+
+.nheadings{
+    font-size: 70px;
+    color: #000;
+    text-align: center;
+    font-family: schrift, arial, sans-serif;
+    font-style: italic;
+}
+#network
+{
+    display: block;
+    width: auto;
+
+
+}
+
+#footer
+{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #1f628d;
+    text-align: center;
+}
+
+#AfD { fill:#009ee0 ; }
+#CSU { fill:#4169e1 ; }
+#CDU { fill:#000 ; }
+#FDP { fill:#ffed00 ; }
+#GRUENE{ fill:#1fa12d ; }
+#SPD { fill:#e2001a ; }
+#DIE\ LINKE { fill:#9932CD ; }
+
+.slidecontainer {
+    width: 960px; /* Width of the outside container */
+}
+
+.containerhashpre {
+    width: 480px; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use webkit (Chrome, Opera, Safari, Edge) and moz (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: steelblue; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.axis {
+    font: 15px sans-serif;
+}
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #D4D8DA;
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
+}
+.toolTip {
+    position: absolute;
+    display: none;
+    min-width: 80px;
+    height: auto;
+    background: none repeat scroll 0 0 #0cf;
+    border: 1px solid #6F257F;
+    padding: 14px;
+    text-align: center;
+}
+select {
+    background-repeat:no-repeat;
+    width:150px;
+    padding:12px;
+    margin-top:8px;
+    font-family:schrift, arial, sans-serif;
+    line-height:1;
+    border-radius:5px;
+    background-color: mediumpurple;
+    color:#000;
+    font-size:20px;
+    -webkit-appearance:none;
+    box-shadow:inset 0 0 10px 0 rgba(0,0,0,0.6);
+    outline:none
+}
+select:hover {
+    color:lightgrey;
+}
+
+.btn {
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    font-family: schrift, arial, sans-serif;
+    color: #000;
+    font-size: 20px;
+    background: mediumpurple;
+    padding: 10px 20px 10px 20px;
+    border: solid #1f628d 2px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
+
+.textinput {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.textinput:focus {
+    width: 30%;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    padding: 1em;
+    text-align: center;
+    background: rgba(33, 108, 105, .4);
+    color: #FFF
+}
